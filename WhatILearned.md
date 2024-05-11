@@ -1,7 +1,11 @@
+-   Fixed link /documents not work, error with getById function in convex server
+
 -   Package/Library
 
     -   usehooks-ts: xử lý mediaquery xịn hơn tailwind
     -   sonner: Toast notification
+    -   zustand: thư viện quản lý state kiểu redux
+    -   blocknote: tạo component editor
 
 -   Write Custom Hooks
 
