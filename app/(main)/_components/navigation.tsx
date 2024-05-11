@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash2 } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { useMutation } from "convex/react";
@@ -20,6 +20,7 @@ const Navigation = () => {
     const search = useSearch();
     const pathname = usePathname();
     const params = useParams();
+    const router = useRouter();
     const isMobile = useMediaQuery("(max-width:768px)");
     const create = useMutation(api.documents.create);
 
@@ -104,7 +105,9 @@ const Navigation = () => {
     };
 
     const handleCreate = () => {
-        const promise = create({ title: "Untitled" });
+        const promise = create({ title: "Untitled" }).then((documentId) =>
+            router.push(`/documents/${documentId}`)
+        );
         toast.promise(promise, {
             loading: "Creating a new note ...",
             success: "New note created!",
@@ -161,7 +164,7 @@ const Navigation = () => {
                     isResetting && "transition-all ease-in-out duration-300",
                     isMobile && "left-0 w-full"
                 )}>
-                {!!params ? (
+                {!!params.documentId ? (
                     <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
                 ) : (
                     <nav className="bg-transparent px-3 py-2 w-full">
