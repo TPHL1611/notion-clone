@@ -11,12 +11,13 @@ export const Logo = () => {
     return (
         <div className="hidden md:flex items-center gap-x-2">
             <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Logo"
-                width={90}
+                width={32}
                 height={32}
                 className="dark:brightness-0 dark:invert"
             />
+            <span className="lg:inline-block dark:text-white">Notion</span>
         </div>
     );
 };
